@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
 const ToolSchema = new mongoose.Schema({
+  file: {
+    type: String,
+  },
   title: {
     type: String,
     required: true,
@@ -19,6 +22,10 @@ const ToolSchema = new mongoose.Schema({
       required: true,
     },
   ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
 
 module.exports = mongoose.model("Tool", ToolSchema);
