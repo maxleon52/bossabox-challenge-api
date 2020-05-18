@@ -4,6 +4,7 @@ const uploadConfig = require("./config/multer");
 
 const ToolController = require("./controllers/ToolController");
 const UserController = require("./controllers/UserController");
+const SessionController = require("./controllers/SessionController");
 
 const routes = express.Router();
 const upload = multer(uploadConfig);
@@ -24,5 +25,6 @@ routes.delete("/tools/:_id", ToolController.destroy);
 routes.post("/signup", UserController.store);
 
 // Sessions
+routes.post("/signin", SessionController.store);
 
 module.exports = routes;

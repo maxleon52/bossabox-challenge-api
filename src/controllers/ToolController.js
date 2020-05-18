@@ -2,14 +2,19 @@ const Tool = require("../models/Tool");
 const User = require("../models/User");
 
 module.exports = {
-  // Lista TODOS
+  // Lista TODOS - OK
   async index(req, res) {
-    const tools = await Tool.find();
+    try {
+      const { user_id } = req.headers;
+      const tools = await Tool.find({ user: user_id });
 
-    return res.status(200).json(tools);
+      return res.status(200).json(tools);
+    } catch (error) {
+      return res.status(400).json({ message: error });
+    }
   },
 
-  // Lista UM
+  // Lista UM - OK
   async show(req, res) {
     try {
       const { tag } = req.query;
@@ -26,7 +31,7 @@ module.exports = {
     } catch (error) {}
   },
 
-  // Cria UM
+  // Cria UM - OK
   async store(req, res) {
     try {
       const { filename } = req.file;
@@ -63,7 +68,7 @@ module.exports = {
     }
   },
 
-  //Atualiza UM
+  //Atualiza UM - OK
   async update(req, res) {
     try {
       const tool = await Tool.findByIdAndUpdate(req.params._id, req.body, {
@@ -75,13 +80,15 @@ module.exports = {
     }
   },
 
-  //Deletar UM
+  //Deletar UM - OK
   async destroy(req, res) {
     try {
       const { _id } = req.params;
 
       await Tool.findByIdAndDelete({ _id: _id });
-      return res.status(204);
+      return res
+        .status(204)
+        .json({ message: "Ferramenta deletada com sucesso" });
     } catch (error) {
       return res.status(400).json(error);
     }
