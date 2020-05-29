@@ -34,7 +34,7 @@ module.exports = {
   // Cria UM - OK
   async store(req, res) {
     try {
-      const { filename } = req.file;
+      // const { filename } = req.file;
       const { title, link, description, tags } = req.body;
       const { user_id } = req.headers;
 
@@ -56,7 +56,7 @@ module.exports = {
       // Cadastra nova ferramenta
       tool = await Tool.create({
         user: user_id,
-        file: filename,
+        // file: filename,
         tags: tags.split(",").map((tag) => tag.trim()),
         title,
         link,
@@ -64,7 +64,7 @@ module.exports = {
       });
       return res.status(201).json(tool);
     } catch (error) {
-      return res.status(401).json({ error: error });
+      return res.status(401).json({ message: "Deu um erro aqui" });
     }
   },
 
