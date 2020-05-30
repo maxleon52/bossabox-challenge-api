@@ -64,7 +64,7 @@ module.exports = {
       });
       return res.status(201).json(tool);
     } catch (error) {
-      return res.status(401).json({ message: "Deu um erro aqui" });
+      return res.status(401).json({ message: "Você preencheu tudo?" });
     }
   },
 
