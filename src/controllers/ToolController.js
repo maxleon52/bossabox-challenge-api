@@ -18,7 +18,20 @@ module.exports = {
   async show(req, res) {
     try {
       const { tag } = req.query;
-      const tools = await Tool.find({ tags: new RegExp(tag, "i") });
+      const { user_id } = req.headers;
+
+      // Verifica se User está logado
+      const user = await User.findById({ _id: user_id });
+
+      if (!user) {
+        return res.status(400).json({ message: "Usuário não logado!" });
+      }
+
+      // Verifica se já existe uma ferramenta cadastrada com a tag
+      const tools = await Tool.find({
+        tags: new RegExp(tag, "i"),
+        user: user_id,
+      });
       console.log(tools);
 
       if (tools.length <= 0) {
@@ -28,7 +41,9 @@ module.exports = {
       }
 
       return res.status(200).json(tools);
-    } catch (error) {}
+    } catch (error) {
+      return res.status(400).json({ message: "Erro inesperado" });
+    }
   },
 
   // Cria UM - OK
@@ -38,7 +53,7 @@ module.exports = {
       const { title, link, description, tags } = req.body;
       const { user_id } = req.headers;
 
-      // // Verifica se User está logado
+      // Verifica se User está logado
       const user = await User.findById(user_id);
 
       if (!user) {
@@ -46,7 +61,7 @@ module.exports = {
       }
 
       // Verifica se já existe uma ferramenta cadastrada com o nome informado
-      let tool = await Tool.findOne({ title });
+      let tool = await Tool.findOne({ title, user: user_id });
       if (tool) {
         return res.status(401).json({
           message: "Já existe uma ferramenta cadastrada com esse nome.",

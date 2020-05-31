@@ -21,7 +21,7 @@ routes.post("/tools", upload.single("file"), ToolController.store);
 routes.put("/tools/:_id", ToolController.update);
 routes.delete("/tools/:_id", ToolController.destroy);
 
-// Users
+// CreateUsers
 routes.post("/signup", UserController.store);
 
 // Sessions
