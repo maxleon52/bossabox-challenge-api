@@ -99,8 +99,9 @@ module.exports = {
   async destroy(req, res) {
     try {
       const { _id } = req.params;
+      const { user_id } = req.headers;
 
-      await Tool.findByIdAndDelete({ _id: _id });
+      await Tool.findByIdAndDelete({ _id: _id, user: user_id });
       return res
         .status(204)
         .json({ message: "Ferramenta deletada com sucesso" });
