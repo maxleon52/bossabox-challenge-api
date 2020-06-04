@@ -4,6 +4,11 @@
 
 A API tem como objetivo cadastrar ferramentas utilizadas no dia-a-dia de um desenvolvedor de softwares ou intusiastas de TI.
 
+## 🚀 Online
+
+A API está hospedada no Heroku na seguinte URL:
+https://bossabox-challenge-api.herokuapp.com/
+
 ## ✔ Funcionalidades
 
 - CRUD de ferramentas
