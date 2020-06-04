@@ -86,8 +86,10 @@ module.exports = {
   //Atualiza UM - OK
   async update(req, res) {
     try {
+      const { user_id } = req.headers;
       const tool = await Tool.findByIdAndUpdate(req.params._id, req.body, {
         new: true,
+        user: user_id,
       });
       return res.status(201).json(tool);
     } catch (error) {

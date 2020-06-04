@@ -29,3 +29,17 @@ A API tem como objetivo cadastrar ferramentas utilizadas no dia-a-dia de um dese
 ## 📝 Outros
 
 Toda a documentação de como utilizar a API encontra-se aqui:
+
+## 🚩 Rotas
+
+Essas são as rotas da API e quais dados devem ser repassados, utilize algum serviço/programa para envio de dados JSON, tais como, POSTMAN ou INSOMNIA.
+
+| METODO | ROTA          | JSON                                                                                             | HEADERS | QUERY                                                             | DESCRIÇÃO                                                    |
+| ------ | ------------- | ------------------------------------------------------------------------------------------------ | ------- | ----------------------------------------------------------------- | ------------------------------------------------------------ |
+| POST   | /signin       | { "email" : "nome_do_email@teste.com"}                                                           | user_id | none                                                              | Faz login no sistema                                         |
+| POST   | /signup       | { "name": "nome_usuario", "email" : "nome_do_email@teste.com" }                                  | none    | none                                                              |
+| GET    | /tools        | none                                                                                             | user_id | none                                                              | Busca ferramentas baseado no "id" do usuário                 |
+| GET    | /tools-search | none                                                                                             | user_id | tag e seu valor (ex: http://localhost:3333/tools-search?tag=node) | Filtra uma ou mais ferramentas de acordo com q query enviada |
+| POST   | /tools        | { "title": "node","link": "www.node.com","description": "Node é bom", "tags": ["node", nodeJs] } | user_id | none                                                              | Cadastra uma nova ferramenta                                 |
+| PUT    | /tools/:\_id  | { "title": "node","link": "www.node.com","description": "Node é bom", "tags": ["node", nodeJs] } | user_id | none                                                              | Atualiza uma nova ferramenta baseado no ID                   |
+| DELETE | /tools/:\_id  | nome                                                                                             | user_id | none                                                              | Deleta uma nova ferramenta baseado no ID                     |
